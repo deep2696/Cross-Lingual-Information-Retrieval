@@ -8,6 +8,7 @@ This project helps in retrieving Sanskrit Manuscripts and Documents
 
 ```
 keras
+tensorflow==1.4
 
 ```
 

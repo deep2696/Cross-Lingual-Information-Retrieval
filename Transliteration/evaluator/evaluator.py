@@ -23,11 +23,13 @@ print(a[0])
 print(s[0])
 
 output=[]
+net_accuracy=[]
 edit_distance_output=[]
 for j in range(5):
 	net_score=0
 	total_words=0
 	edit_distance_score=0
+	accuracy=0.0
 	for i in range(int(floor(j*len(a))/5.0),int(floor((j+1)*len(a))/5.0)):
 		reference = [a[i]]
 		candidate = s[i]
@@ -36,15 +38,25 @@ for j in range(5):
 		total_words+=1
 		sm = edit_distance.SequenceMatcher(a=a[i], b=s[i])
 		edit_distance_score+=sm.ratio()
+		if a[i]==s[i][:-1]:
+			accuracy+=1
+	net_accuracy.append(accuracy/total_words)
 	edit_distance_output.append(edit_distance_score/total_words)
 	output.append(net_score/total_words)
 
 print(output)
-
 plt.plot([1,2,3,4,5], output, 'ro')
 plt.axis([0, 6, 0.7, 0.8])
 plt.xlabel('Test Set')
 plt.ylabel('Bleu Score')
+plt.show()
+
+
+print(net_accuracy)
+plt.plot([1,2,3,4,5], net_accuracy, 'ro')
+plt.axis([0, 6, 0.4, 0.5])
+plt.xlabel('Test Set')
+plt.ylabel('Accuracy')
 plt.show()
 
 print(edit_distance_output)

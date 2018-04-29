@@ -59,11 +59,19 @@ input_token_index = dict(
     [(char, i) for i, char in enumerate(input_characters)])
 target_token_index = dict(
     [(char, i) for i, char in enumerate(target_characters)])
-input_texts=open('data.txt','r').read().split(' ')
+
+lines=open('data.txt','r').read().splitlines()
+input_texts=[]
+end_line=[]
+for i in lines:
+    counter=0
+    for j in i.split(' '):
+        counter+=1
+        input_texts.append(j)
+    end_line.append(counter)    
 encoder_input_data = np.zeros(
     (len(input_texts), max_encoder_seq_length, num_encoder_tokens),
     dtype='float32')
-
 for i, input_text in enumerate(input_texts):
     for t, char in enumerate(input_text):
         encoder_input_data[i, t, input_token_index[char]] = 1.
@@ -136,10 +144,16 @@ def decode_sequence(input_seq):
 
     return decoded_sentence
 
-
+j=0
 for seq_index in range(len(input_texts)):
     # Take one sequence (part of the training set)
     # for trying out decoding.
+
     input_seq = encoder_input_data[seq_index: seq_index + 1]
     decoded_sentence = decode_sequence(input_seq)
     print(decoded_sentence.split('\n')[0],end=" ")
+    if end_line[j]==1:
+        print()
+        j+=1
+    else:
+        end_line[j]-=1
