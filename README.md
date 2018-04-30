@@ -19,6 +19,15 @@ tensorflow==1.4
 pip install -r requirements.txt
 ```
 
+or
+
+```
+pip install keras
+pip install tensorflow
+pip install matplotlib
+pip install indic_transliteration
+
+```
 ### Example
 
 
@@ -48,6 +57,7 @@ Output:-
 ## Authors
 
 * **Sujal Maheswari** - [IIT-Sujal](https://github.com/IIT-Sujal)
+* **Deepanshu Gupta** - [deep2696](https://github.com/deep2696)
 
 ## License
 
